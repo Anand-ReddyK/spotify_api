@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* background-color: #2196F3; */
+    padding: 10px;
+    margin-left: auto; 
+    margin-right: auto;
+    text-align: center;
+    margin: 63px 264px;
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    /* border: 1px solid rgba(0, 0, 0, 0.8); */
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+table {
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<div class="grid-container">
+    {% for user in users %}
+  <div class="grid-item">
+        <table>
+            <tr>
+                <td>
+                <a href={{user[1]['url']}} target="_blank">
+                                
+                    <button id='RedirButton'><img src="{{user[1]['image']['url']}}" alt="Girl in a jacket" width="250" height="250"></button>
+                </a>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- for space -->
+                </td>
+            </tr>
+            <tr>
+                <td>
+                {{user[0]}}
+                </td>
+            </tr>
+        </table>
+    </div>  
+  {% endfor %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourite Songs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static', filename='styles/index.css')}}" />
+    <style>
+        h1 {
+            color: rgb(53, 165, 63);
+        }
+
+        body {
+            background-color: rgb(154, 190, 150);
+        }
+
+        table.center {
+            margin-left: auto; 
+            margin-right: auto;
+            background-color: rgb(190, 214, 187);
+        }
+
+        table, th, td.namee {
+            border: 5px solid black;
+            border-collapse: collapse;
+        }
+
+
+        td.name1 {
+            padding: 5px 10px;
+            padding-right: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 70px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        .center {
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 20px 37px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 25px;
+            margin: 40px -5px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            border-radius: 12px;
+        }
+
+        .button:hover {
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,0.29);
+        }
+
+        /* .button1{
+            padding-right: 20px;
+        } */
+        
+        .atag {
+            margin: 40px 20px;
+            /* padding: 20px; */
+        }
+
+        .zoom {
+            padding: 10px;
+            padding-right: 20px;
+            /* background-color: green; */
+            transition: transform .2s;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        .zoom:hover {
+            -ms-transform: scale(1.5); /* IE 9 */
+            -webkit-transform: scale(1.5); /* Safari 3-8 */
+            transform: scale(1.5); 
+        }
+
+        .head {
+            font-size: 30px;
+        }
+
+        .rowhead {
+            background-color: rgb(137, 175, 133);
+        }
+    </style>
+</head>
+<body>
+    <div id='page'>
+        
+        <h1>Favourite Songs</h1>
+        
+        <div class="center">
+
+            <a href="/short_term" class="atag atag1"> <button type="button" class="button button1"> Last 4 Weeks </button> 
+            </a>
+
+            <a href="/medium_term" class="atag atag2"> <button type="button" class=" button button2"> Last 6 Months </button> 
+            </a>
+
+            <a href="/long_term" class="atag atag3"> <button type="button" class="button button3"> All Time </button>
+            </a>
+        
+        {% if time %}
+        <h1>{{time}}</h1>
+        {% endif %}
+
+        </div>
+        <div id='songsContainer'>
+
+            <!-- {% if not users %}
+            <form action="{{ url_for("home")}}" method="POST">
+                <input type="text" name="term"/>
+                <br>
+                <input type="submit" value="Submit"/>
+            </form>
+            {% endif %} -->
+        {% if users %}
+        <table class="center">
+            <tr class="rowhead">
+                <th>No.</th>
+                <th><h3 class="head head1">Picture</h3></th>
+                <th><h3 class="head head2">Nmae of Song</h3></th>
+                <th><h3 class="head head3">Artist</h3></th>
+            </tr>
+        {% endif %}
+        
+        {% for user in users %}
+        <tr>
+            
+            
+                <td>
+                    <h3>{{user[1]['num']}})</h3>
+                </td>
+                
+                <td class="namee2">
+                    <div class="zoom">
+                        <a href={{user[1]['url']}} target="_blank">
+                    
+                            <button id='RedirButton'><img src="{{user[1]['song_img']}}" alt="Girl in a jacket" width="60" height="60"></button>
+                        </a>
+                    </div>
+                </td>
+
+                <td class="namee name1">
+                    <h2> {{user[0]}}</h2>
+                    <!-- {{user[1]['num']}}) -->
+                </td>
+
+                <td class="namee name2">
+                    <h2>{{user[1]['artist']}}</h2>
+                </td>
+
+            
+            
+        </tr>
+        {% endfor %}
+
+        </table>
+
+        </div>
+    
+    </div>
+    
+</body>
+</html>
